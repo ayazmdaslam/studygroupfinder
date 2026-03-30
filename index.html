@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Group Finder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Auth Pages (Login/Registration) -->
+    <div id="authContainer" class="auth-container">
+        <!-- Login Page -->
+        <div id="loginPage" class="auth-page active">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <img src="adbu_logo.png" width="100" height="100" alt="Study Group Finder Logo">
+                    <h1> Study Group Finder</h1>
+                    <p>Connect with fellow students</p>
+                </div>
+
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required placeholder="Enter your password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Login</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Page -->
+        <div id="registerPage" class="auth-page">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <img src="adbu_logo.png" width="100" height="100" alt="Study Group Finder Logo">
+                    <h1>Study Group Finder</h1>
+                    <p>Join our community</p>
+                </div>
+
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" required placeholder="Create a password (min 6 chars)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirm Password</label>
+                        <input type="password" id="registerConfirmPassword" required placeholder="Confirm your password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="appContainer" class="app-container" style="display: none;">
+        <div class="container">
+            <!-- Header with Theme Toggle and Logout -->
+            <header class="header">
+                <div class="header-content">
+                    <img src="adbu_logo.png" width="100" height="100" alt="Study Group Finder Logo">
+
+                    <h1> Study Group Finder</h1>
+                    <p class="subtitle">Connect with fellow students and ace your courses together</p>
+                </div>
+                <div class="header-actions">
+                    <button id="themeToggle" class="theme-toggle" title="Toggle Dark Mode">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <div class="user-menu">
+                        <button id="userMenuBtn" class="user-btn">
+                            <span id="userName">User</span> ▼
+                        </button>
+                        <div id="userDropdown" class="user-dropdown">
+                            <button id="logoutBtn" class="dropdown-item logout-btn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Navigation Tabs -->
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-tab="browse">Browse Groups</button>
+                <button class="tab-btn" data-tab="create">Create Group</button>
+                <button class="tab-btn" data-tab="my-groups">My Groups</button>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Browse Groups Tab -->
+                <section id="browse" class="tab-content active">
+                    <div class="section-header">
+                        <h2>Available Study Groups</h2>
+                        <div class="search-filters">
+                            <input type="text" id="searchInput" class="search-box" placeholder="Search by subject or course...">
+                            <select id="difficultyFilter" class="filter-select">
+                                <option value="">All Levels</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="groupsList" class="groups-grid">
+                        <!-- Groups will be dynamically added here -->
+                    </div>
+
+                    <div id="noGroupsMsg" class="empty-state">
+                        <p>No study groups found. Be the first to create one!</p>
+                    </div>
+                </section>
+
+                <!-- Create Group Tab -->
+                <section id="create" class="tab-content">
+                    <div class="section-header">
+                        <h2>Create a New Study Group</h2>
+                    </div>
+
+                    <form id="createGroupForm" class="form-container">
+                        <div class="form-group">
+                            <label for="groupName">Group Name *</label>
+                            <input type="text" id="groupName" required placeholder="e.g., Calculus Study Squad">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <input type="text" id="subject" required placeholder="e.g., Mathematics">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="courseCode">Course Code *</label>
+                                <input type="text" id="courseCode" required placeholder="e.g., MATH 101">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="difficulty">Difficulty Level *</label>
+                                <select id="difficulty" required>
+                                    <option value="">Select Level</option>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="maxMembers">Max Members *</label>
+                                <input type="number" id="maxMembers" required min="2" max="50" value="10" placeholder="10">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description *</label>
+                            <textarea id="description" required rows="4" placeholder="Describe the group's goals and what topics you'll cover..."></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="meetingTime">Meeting Time *</label>
+                                <input type="text" id="meetingTime" required placeholder="e.g., Monday & Wednesday, 6 PM">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location">Location/Platform *</label>
+                                <input type="text" id="location" required placeholder="e.g., Library Room 201 or Zoom">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Create Study Group</button>
+                    </form>
+                </section>
+
+                <!-- My Groups Tab -->
+                <section id="my-groups" class="tab-content">
+                    <div class="section-header">
+                        <h2>My Study Groups</h2>
+                    </div>
+
+                    <div id="myGroupsList" class="groups-grid">
+                        <!-- User's groups will be dynamically added here -->
+                    </div>
+
+                    <div id="noMyGroupsMsg" class="empty-state">
+                        <p>You haven't joined any study groups yet. Browse available groups to get started!</p>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Modal for Group Details -->
+            <div id="groupModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="modalBody">
+                        <!-- Group details will be added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Modal -->
+            <div id="chatModal" class="modal">
+                <div class="modal-content modal-chat">
+                    <div class="chat-header">
+                        <h3 id="chatGroupName">Group Chat</h3>
+                        <span class="close close-chat">&times;</span>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages will be added here -->
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="chat-status" id="chatStatus"></div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chatInput" class="chat-input" placeholder="Type a message...">
+                            <button class="btn btn-primary btn-send" id="sendBtn">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 Study Group Finder. Learn better together!</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
