@@ -40,7 +40,7 @@ http://localhost:3000
 ## Demo Video: 
 
 Watch the project demo here:
-👉 (Add your YouTube link here later)
+....
 
 ## Features:
 
